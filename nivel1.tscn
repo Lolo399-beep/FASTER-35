@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://ctrvbds7576el"]
+
+[ext_resource type="Texture2D" uid="uid://8018f3ipoh6" path="res://cesped.jpg" id="1_a8tsm"]
+[ext_resource type="Script" path="res://jugador.gd" id="2_6cksv"]
+[ext_resource type="Texture2D" uid="uid://ret27any7g6h" path="res://icon.svg" id="3_tdrki"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_enjkc"]
+size = Vector2(1051.42, 716.827)
+
+[sub_resource type="TileSet" id="TileSet_rkjxh"]
+physics_layer_0/collision_layer = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_enwyc"]
+size = Vector2(128, 131)
+
+[node name="Node" type="Node"]
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Cesped" type="Sprite2D" parent="Node2D"]
+position = Vector2(2, 181)
+scale = Vector2(1.05667, 0.297143)
+texture = ExtResource("1_a8tsm")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Node2D/Cesped"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Cesped/StaticBody2D"]
+position = Vector2(1.41956, -11.7787)
+shape = SubResource("RectangleShape2D_enjkc")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Node2D"]
+enabled = false
+tile_set = SubResource("TileSet_rkjxh")
+
+[node name="Jugador" type="CharacterBody2D" parent="Node2D"]
+script = ExtResource("2_6cksv")
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/Jugador"]
+texture = ExtResource("3_tdrki")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Jugador"]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_enwyc")
+
+[node name="Camera2D" type="Camera2D" parent="Node2D/Jugador"]
