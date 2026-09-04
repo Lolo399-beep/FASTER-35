@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://ctrvbds7576el"]
+[gd_scene format=3 uid="uid://ctrvbds7576el"]
 
 [ext_resource type="Texture2D" uid="uid://8018f3ipoh6" path="res://cesped.jpg" id="1_a8tsm"]
-[ext_resource type="Script" path="res://jugador.gd" id="2_6cksv"]
+[ext_resource type="Script" uid="uid://dwhn7g46jmbo7" path="res://jugador.gd" id="2_6cksv"]
 [ext_resource type="Texture2D" uid="uid://ret27any7g6h" path="res://icon.svg" id="3_tdrki"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_enjkc"]
@@ -13,33 +13,38 @@ physics_layer_0/collision_layer = 1
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_enwyc"]
 size = Vector2(128, 131)
 
-[node name="Node" type="Node"]
+[node name="Node" type="Node" unique_id=23987474]
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="Node2D" type="Node2D" parent="." unique_id=1413338926]
+position = Vector2(0, -2)
 
-[node name="Cesped" type="Sprite2D" parent="Node2D"]
+[node name="Cesped" type="Sprite2D" parent="Node2D" unique_id=779238059]
 position = Vector2(2, 181)
 scale = Vector2(1.05667, 0.297143)
 texture = ExtResource("1_a8tsm")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Node2D/Cesped"]
+[node name="StaticBody2D" type="StaticBody2D" parent="Node2D/Cesped" unique_id=583228446]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Cesped/StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Cesped/StaticBody2D" unique_id=483152218]
 position = Vector2(1.41956, -11.7787)
 shape = SubResource("RectangleShape2D_enjkc")
 
-[node name="TileMapLayer" type="TileMapLayer" parent="Node2D"]
+[node name="TileMapLayer" type="TileMapLayer" parent="Node2D" unique_id=42209374]
 enabled = false
 tile_set = SubResource("TileSet_rkjxh")
 
-[node name="Jugador" type="CharacterBody2D" parent="Node2D"]
+[node name="Jugador" type="CharacterBody2D" parent="Node2D" unique_id=1441476885]
+position = Vector2(-481, 32)
 script = ExtResource("2_6cksv")
 
-[node name="Sprite2D" type="Sprite2D" parent="Node2D/Jugador"]
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/Jugador" unique_id=1923985234]
+position = Vector2(5, -20)
 texture = ExtResource("3_tdrki")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Jugador"]
-position = Vector2(0, -1.5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Jugador" unique_id=2141775777]
+position = Vector2(5, -21)
 shape = SubResource("RectangleShape2D_enwyc")
 
-[node name="Camera2D" type="Camera2D" parent="Node2D/Jugador"]
+[node name="Camera2D" type="Camera2D" parent="Node2D/Jugador" unique_id=1950167124]
+position = Vector2(-1, 0)
+zoom = Vector2(0.5, 0.5)
