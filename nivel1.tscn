@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://5d74adnaiw74" path="res://jugador.gd" id="2_6cksv"]
 [ext_resource type="Texture2D" uid="uid://bhwoujot64bks" path="res://Auto_sprite_1.png" id="2_hbxap"]
-[ext_resource type="Texture2D" uid="uid://bac8veyg0cem7" path="res://Ruedas_sprite_1.png" id="3_cotxi"]
+[ext_resource type="Texture2D" uid="uid://dd0uexn63ywei" path="res://llanta.png.png" id="3_hbxap"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_iicca"]
 load_path = "res://.godot/imported/Ruta (piso)_1.png-a1ee30414d3102dc6bf7d91040224221.ctex"
@@ -25,9 +25,9 @@ position = Vector2(0, -2)
 position = Vector2(2, 181)
 scale = Vector2(1.05667, 0.297143)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Node2D/objetos" unique_id=583228446]
+[node name="Calle" type="StaticBody2D" parent="Node2D/objetos" unique_id=583228446]
 
-[node name="Sprite2D" type="Sprite2D" parent="Node2D/objetos/StaticBody2D" unique_id=2029417275]
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/objetos/Calle" unique_id=2029417275]
 texture_filter = 1
 texture_repeat = 2
 position = Vector2(1768.764, 733.6533)
@@ -35,7 +35,41 @@ scale = Vector2(35.73316, 35.73316)
 texture = SubResource("CompressedTexture2D_iicca")
 region_rect = Rect2(0, 0, 100, 128)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/objetos/StaticBody2D" unique_id=483152218]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/objetos/Calle" unique_id=483152218]
+position = Vector2(1763.5592, 2783.1716)
+scale = Vector2(5, 5)
+shape = SubResource("RectangleShape2D_enjkc")
+
+[node name="Calle2" type="StaticBody2D" parent="Node2D/objetos" unique_id=644248681]
+position = Vector2(9127.731, 6.7307434)
+constant_linear_velocity = Vector2(0, 5)
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/objetos/Calle2" unique_id=1184660014]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(1768.764, 733.6533)
+scale = Vector2(35.73316, 35.73316)
+texture = SubResource("CompressedTexture2D_iicca")
+region_rect = Rect2(0, 0, 100, 128)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/objetos/Calle2" unique_id=1906527274]
+position = Vector2(1763.5592, 2783.1716)
+scale = Vector2(5, 5)
+shape = SubResource("RectangleShape2D_enjkc")
+
+[node name="Calle3" type="StaticBody2D" parent="Node2D/objetos" unique_id=1252227928]
+position = Vector2(18264.928, 6.7307434)
+constant_linear_velocity = Vector2(0, 5)
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/objetos/Calle3" unique_id=846993848]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(1768.764, 733.6533)
+scale = Vector2(35.73316, 35.73316)
+texture = SubResource("CompressedTexture2D_iicca")
+region_rect = Rect2(0, 0, 100, 128)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/objetos/Calle3" unique_id=881557400]
 position = Vector2(1763.5592, 2783.1716)
 scale = Vector2(5, 5)
 shape = SubResource("RectangleShape2D_enjkc")
@@ -54,12 +88,25 @@ position = Vector2(-3, -62.99997)
 scale = Vector2(10.645834, 10.645834)
 texture = ExtResource("2_hbxap")
 
-[node name="Sprite2D" type="Sprite2D" parent="Node2D/Jugador/Sprite2D" unique_id=1070837978]
+[node name="llanta1" type="Sprite2D" parent="Node2D/Jugador/Sprite2D" unique_id=1070837978]
 texture_filter = 1
-texture = ExtResource("3_cotxi")
+texture_repeat = 2
+position = Vector2(19.726027, 6.2935414)
+rotation = 0.00075095176
+scale = Vector2(0.35273975, 0.35273975)
+texture = ExtResource("3_hbxap")
+offset = Vector2(0, -2)
+
+[node name="llanta2" type="Sprite2D" parent="Node2D/Jugador/Sprite2D" unique_id=1121142837]
+texture_filter = 1
+texture_repeat = 2
+position = Vector2(-22.074366, 6.481406)
+scale = Vector2(0.36741674, 0.36741674)
+texture = ExtResource("3_hbxap")
+offset = Vector2(0, -2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Jugador" unique_id=2141775777]
-position = Vector2(-3, -68)
+position = Vector2(-4, -81)
 shape = SubResource("RectangleShape2D_enwyc")
 
 [node name="Camera2D" type="Camera2D" parent="Node2D/Jugador" unique_id=1950167124]

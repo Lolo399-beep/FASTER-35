@@ -1,12 +1,19 @@
 extends CharacterBody2D
 
+# --- REFERENCIAS A LAS LLANTAS ---
+@onready var llanta1: Sprite2D = $Sprite2D/llanta1
+@onready var llanta2: Sprite2D = $Sprite2D/llanta2
+
+# --- PARÁMETROS VISUALES ---
+@export var multiplicador_rotacion_llantas: float = 0.05 
+
 # --- PARÁMETROS DE VIDA ---
 @export var puntos_de_vida: int = 5
 
 # --- PARÁMETROS DE VELOCIDAD ---
-@export var velocidad_normal: float = 400.0
-@export var velocidad_turbo: float = 800.0
-@export var velocidad_lenta: float = 150.0
+@export var velocidad_normal: float = 800.0
+@export var velocidad_turbo: float = 1600.0
+# Se eliminó "velocidad_lenta" porque ya no se usará
 
 # --- PARÁMETROS DE ENERGÍA ---
 @export var energia_maxima: float = 100.0
@@ -22,7 +29,7 @@ var max_saltos: int = 3
 
 # --- PARÁMETROS DE INCLINACIÓN ---
 @export var velocidad_rotacion: float = 4.0
-@export var limite_inclinacion_grados: float = 45.0 # Límite para que no se ponga boca abajo
+@export var limite_inclinacion_grados: float = 45.0 
 
 # Obtenemos la gravedad de la configuración del proyecto
 var gravedad: float = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -36,19 +43,19 @@ func _ready() -> void:
 	add_child(timer_recarga)
 
 func _physics_process(delta: float) -> void:
-	# 1. GRAVEDAD Y REINICIO DE SALTOS (Siempre se aplica para no perder la caída)
+	# 1. GRAVEDAD Y REINICIO DE SALTOS
 	if not is_on_floor():
 		velocity.y += gravedad * delta
 	else:
 		saltos_realizados = 0
 
-	# 2. TRIPLE SALTO (Mapeado a la barra espaciadora / "ui_accept")
+	# 2. TRIPLE SALTO
 	if Input.is_action_just_pressed("ui_accept"):
 		if saltos_realizados < max_saltos:
 			velocity.y = fuerza_salto
 			saltos_realizados += 1
 
-	# 3. INCLINACIÓN DEL AUTO (W/S o Flechas Arriba/Abajo)
+	# 3. INCLINACIÓN DEL AUTO
 	var direccion_inclinacion = Input.get_axis("ui_up", "ui_down")
 	rotation += direccion_inclinacion * velocidad_rotacion * delta
 	
@@ -61,7 +68,8 @@ func _physics_process(delta: float) -> void:
 	var usando_turbo = Input.is_physical_key_pressed(KEY_SHIFT)
 
 	if agotado:
-		velocidad_actual = velocidad_lenta
+		# MODIFICACIÓN: En lugar de "velocidad_lenta", el auto mantiene su velocidad base
+		velocidad_actual = velocidad_normal 
 	elif usando_turbo and energia_actual > 0:
 		velocidad_actual = velocidad_turbo
 		energia_actual -= 60.0 * delta # Gasta la energía
@@ -87,16 +95,18 @@ func _physics_process(delta: float) -> void:
 		# Movimiento horizontal en X
 		velocity.x = direccion_auto.x * velocidad_actual * input_derecha
 		
-		# EMPUJE DEL PROPULSOR EN Y (Suma fuerza progresiva sin borrar la gravedad ni los saltos)
+		# EMPUJE DEL PROPULSOR EN Y
 		if usando_turbo and not agotado:
-			# Añade un empuje vertical basado en el ángulo hacia donde apunta el auto
 			velocity.y += direccion_auto.y * velocidad_actual * delta * 2.0
 		else:
-			# Empuje leve si solo se acelera normalmente estando inclinado
 			velocity.y += direccion_auto.y * (velocidad_actual * 0.5) * delta
 	else:
 		# Fricción horizontal si se suelta el acelerador
 		velocity.x = move_toward(velocity.x, 0, velocidad_normal)
+
+	# 6. ROTACIÓN DE LAS LLANTAS
+	llanta1.rotation += velocity.x * multiplicador_rotacion_llantas * delta
+	llanta2.rotation += velocity.x * multiplicador_rotacion_llantas * delta
 
 	move_and_slide()
 
